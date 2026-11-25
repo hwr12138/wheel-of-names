@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Spin a wheel of names. Each spin draws one name and takes it off the wheel." />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>Wheel of Names</title>
+  </head>
+  <body>
+    <main>
+      <section id="setup" class="screen setup" aria-labelledby="setup-title" hidden>
+        <h1 id="setup-title">Wheel of Names</h1>
+        <p class="lead">Enter the names to draw, one per line. Each spin picks one and takes it off the wheel.</p>
+        <label class="field-label" for="names-input">Names</label>
+        <textarea
+          id="names-input"
+          rows="12"
+          spellcheck="false"
+          autocomplete="off"
+          placeholder="Alice&#10;Bob&#10;Charlie"
+          aria-describedby="name-count"
+        ></textarea>
+        <div class="setup-footer">
+          <span id="name-count" class="muted" aria-live="polite"></span>
+          <button id="start-btn" class="btn btn-primary" type="button">Start</button>
+        </div>
+      </section>
+
+      <section id="play" class="screen play" aria-label="Wheel" hidden>
+        <div class="wheel-area">
+          <div class="wheel-wrap">
+            <canvas id="wheel" role="img" aria-label="Wheel of names"></canvas>
+            <div class="pointer" aria-hidden="true"></div>
+            <button id="spin-btn" class="hub" type="button">SPIN</button>
+          </div>
+        </div>
+        <aside class="panel">
+          <p id="remaining" class="remaining"></p>
+          <h2>Drawn</h2>
+          <ol id="drawn-list" class="drawn-list"></ol>
+          <p id="drawn-empty" class="muted">No names drawn yet. Click SPIN in the middle of the wheel.</p>
+          <div class="panel-actions">
+            <button id="sound-btn" class="btn" type="button" aria-pressed="true">Sound on</button>
+            <button id="end-btn" class="btn" type="button">End session</button>
+          </div>
+        </aside>
+      </section>
+
+      <section id="done" class="screen done" aria-labelledby="done-title" hidden>
+        <h1 id="done-title">All names drawn</h1>
+        <p class="lead">Here's the order they came out in.</p>
+        <ol id="final-list" class="final-list"></ol>
+        <div class="done-actions">
+          <button id="again-btn" class="btn btn-primary" type="button">Spin again with the same names</button>
+          <button id="edit-btn" class="btn" type="button">Edit names</button>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="result" class="result" aria-labelledby="result-name" aria-describedby="result-intro">
+      <div class="result-card">
+        <p id="result-intro" class="muted">The wheel picked</p>
+        <h2 id="result-name" class="result-name"></h2>
+        <p id="result-note" class="muted"></p>
+        <button id="result-ok" class="btn btn-primary" type="button" autofocus>Next</button>
+      </div>
+    </dialog>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
